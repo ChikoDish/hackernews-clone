@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Header from "./Header";
-import Home from "./Home";
 import PageNotFound from "./PageNotFound";
 import ShowStories from "./ShowStories";
 const AppRouter = () => {
