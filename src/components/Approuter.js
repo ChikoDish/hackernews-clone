@@ -1,15 +1,26 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
 import PageNotFound from "./PageNotFound";
+import ShowStories from "./ShowStories";
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <div className="container">
         <Header />
         <Switch>
-          <Route path="/" component={Home} exact />
+          <Route path="/" render={() => <Redirect to="/top" />} exact={true} />
+          <Route
+            path="/:type"
+            render={({ match }) => {
+              const { type } = match.params;
+              if (!["top", "new", "best"].includes(type)) {
+                return <Redirect to="/" />;
+              }
+              return <ShowStories type={type} />;
+            }}
+          />
           <Route component={PageNotFound} />
         </Switch>
       </div>
